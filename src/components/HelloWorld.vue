@@ -1,6 +1,39 @@
 <template>
   <div class="hello">
+    <h2>third example</h2>
+    <ApolloQuery :query="require('../graphql/countries.gql')">
+      <template v-slot="{result: {loading, error, data}}">
+        <div v-if="loading">
+          <div>loading</div>
+        </div>
+        <div v-if="error"></div>
+        <div v-if="data">
+          <div v-for="c in data.countries" :key="c.id">{{c}}</div>
+        </div>
+      </template>
+    </ApolloQuery>
+    <h2>first example</h2>
     <div v-for="c in countries" :key="c.id">{{c}}</div>
+    <h2>second example</h2>
+    <ApolloQuery
+      :query="gql => gql`
+        query {
+          countries {
+            name
+          }
+        }
+    `"
+    >
+      <template v-slot="{result: {loading, error, data}}">
+        <div v-if="loading">
+          <div>loading</div>
+        </div>
+        <div v-if="error"></div>
+        <div v-if="data">
+          <div v-for="c in data.countries" :key="c.id">{{c}}</div>
+        </div>
+      </template>
+    </ApolloQuery>
   </div>
 </template>
 
@@ -10,6 +43,11 @@ export default {
   name: "HelloWorld",
   props: {
     msg: String
+  },
+  data() {
+    return {
+      count: 2
+    };
   },
   apollo: {
     countries: gql`
