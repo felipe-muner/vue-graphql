@@ -1,3 +1,6 @@
+##Project developed in Vue + Apollo Server(graphQL) to fetch data in 3 different ways from the backend.
+
+
 # vue-graphql
 
 ## Project setup
